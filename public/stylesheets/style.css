@@ -1,6 +1,8 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  color: white;
+  background-color: black
 }
 
 a {
@@ -10,4 +12,27 @@ a {
 #map {
   width: 100%;
   height: 600px;
+}
+
+table {
+  border: solid 2px black;
+  border-collapse: collapse;
+  text-align: center;
+  font-size: 11px;
+  width: 700px;
+  background: white 
+}
+
+th {
+  border: solid 1px black;
+  border-collapse: collapse;
+  padding: 5px;
+  text-align: right;
+}
+
+td {
+  border: solid 1px black;
+  border-collapse: collapse;
+  text-align: left;
+  padding: 5px
 }

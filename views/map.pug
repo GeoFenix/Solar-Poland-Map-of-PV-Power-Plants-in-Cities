@@ -1,23 +1,72 @@
 extends layout
 block content
-    form(action='/filter')
-        select(name='name')
-            option(disabled='', selected='', value='') Select One...
-            option(value='Starbucks') Starbucks
-            option(value='1369 Coffee House') 1369 Coffee House
-        input(type='submit', value='Submit')
+    <h1> Aktualne inicjatywy powstawania miejskich elektrowni słonecznych w Polsce </h1>
+    //- form(action='/filter')
+    //-     select(name='miasto')
+    //-         option(disabled='', selected='', value='') Select One...
+    //-         option(value='Warszawa') Spółdzielnia Budowlano-Mieszkaniowa "Zachód"
+    //-         option(value='Wrocław') Wrocławska Elektrownia Słoneczna Spółdzielni Mieszkaniowej Wrocław-Południe
+    //-         option(value='Kraków') Spółdzielnia Mieszkaniowa "Czyżyny"
+    //-     input(type='submit', value='Submit')
     #map
     script.
         var myData = !{JSON.stringify(jsonData)};
         // Create variable to hold map element, give initial settings to map
-        var map = L.map('map',{ center: [42.375562, -71.106870], zoom: 14});
+        var map = L.map('map',{ center: [51.103660, 17.031371], zoom: 12});
         // Add OpenStreetMap tile layer to map element
         L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         	attribution: '© OpenStreetMap'
         }).addTo(map);
         // Add JSON to map
+        var p = 'czesc to ja'
         L.geoJson(myData,{
             onEachFeature: function (feature, layer) {
-                layer.bindPopup(feature.properties.f2);
+                var table = document.createElement('table');
+                var tableHeader = document.createElement('thead');
+                var tableBody = document.createElement('tbody');
+                var tableRow = document.createElement('tr');
+
+                var headers = ['Id', 'Nazwa spółdzielni', 'Rodzaj spółdzielni', 'Miasto', 'Rok oddania do użytku', 'Adres', 'Ilość instalacji', 'Rodzaj instalacji', 'Moc całkowita instalacji', 'Produkcja energii na rok', 'Koszty', 'Realizator', 'Prognozowana redukcja CO2 (na rok?)', 'Info URL']
+                var thBox = []
+                for (var it = 0; it < headers.length; it++) {
+                    var th = document.createElement('th');
+                    th.innerText = headers[it];
+                    tableHeader.appendChild(th)
+                    thBox.push(th)
+                }
+                console.log(thBox)
+                
+                var properties = feature.properties
+                var tdBox = [];
+                for (var value in properties) {
+                    var td = document.createElement('td');
+                    td.innerText = properties[value];
+                    tableRow.appendChild(td);
+                    tdBox.push(td)
+                };
+
+                console.log(tdBox)
+
+                var table2 = document.createElement('table');
+                for (var it = 0; it < headers.length; it++) {
+                    var tableRow2 = document.createElement('tr');
+                    tableRow2.appendChild(thBox[it]);
+                    tableRow2.appendChild(tdBox[it]);
+                    table2.appendChild(tableRow2);
+                }
+                console.log(table2)
+
+                var ul = document.createElement('ul');
+                for (var it = 0; it < headers.length; it++) {
+                    var li = document.createElement('li');
+                    li.innerText = headers[it] + ': ' + feature.properties['f' + (it + 1)];
+                    ul.appendChild(li);
+                }
+                console.log(ul);
+          
+                layer.bindPopup(table2);
+                //- layer.bindPopup(feature.properties.f3);
+                //- var $p = $('<p></p>')
+                //- layer.bindPopup(p);
             }
         }).addTo(map);
