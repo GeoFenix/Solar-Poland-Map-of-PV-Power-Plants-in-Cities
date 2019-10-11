@@ -11,14 +11,36 @@ block content
     #map
     script.
         var myData = !{JSON.stringify(jsonData)};
+        var myData2 = !{JSON.stringify(jsonData2)};
         // Create variable to hold map element, give initial settings to map
-        var map = L.map('map',{ center: [51.103660, 17.031371], zoom: 12});
+        var map = L.map('map',{ center: [51.213728, 19.661492], zoom: 6});
         // Add OpenStreetMap tile layer to map element
         L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         	attribution: '© OpenStreetMap'
         }).addTo(map);
+        // Testy innych tile Layer - ArcGIS World Imagery
+        var mapLink = 
+            '<a href="http://www.esri.com/">Esri</a>';
+        var wholink = 
+            'i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
+        L.tileLayer(
+            'http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            attribution: '&copy; '+mapLink+', '+wholink,
+            maxZoom: 18,
+            }).addTo(map);
+        // Testy WMS tile Layer - DTM: http://mapy.geoportal.gov.pl/wss/service/wmsimg/guest/ISOK_HipsoDyn/ImageServer/WMSServer
+        //- var nexrad = L.tileLayer.wms("http://mapy.geoportal.gov.pl/wss/service/wmsimg/guest/ISOK_HipsoDyn/ImageServer/WMSServer", {
+        //-     //- layers: 'ISOK_HipsoDyn',
+        //-     format: 'image/jpeg',
+        //-     transparent: true,
+        //-     attribution: "ISOK_HipsoDyn"
+        //- }).addTo(map);;
+
+        
         // Add JSON to map
         var p = 'czesc to ja'
+
+        L.geoJson(myData2).addTo(map);
         L.geoJson(myData,{
             onEachFeature: function (feature, layer) {
                 var table = document.createElement('table');
@@ -70,3 +92,5 @@ block content
                 //- layer.bindPopup(p);
             }
         }).addTo(map);
+
+        
