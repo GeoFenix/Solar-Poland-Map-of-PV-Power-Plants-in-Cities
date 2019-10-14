@@ -40,7 +40,34 @@ block content
         // Add JSON to map
         var p = 'czesc to ja'
 
-        L.geoJson(myData2).addTo(map);
+        //- var styleForMyData2 = {
+        //-     "color": "#ff7800",
+        //-     "weight": 5,
+        //-     "opacity": 0.65, 
+        //-     color: 'white',
+        //-     dashArray: '3',
+        //-     fillOpacity: 0.7
+        //- };
+
+        var styleForMyData2 = {
+            color: "#ff7800",
+            weight: 5,
+            //- opacity: 0.65, 
+            //- dashArray: 3,
+            fillOpacity: 0
+        };
+
+        // Mydata2 -> poligony Państw
+        //- L.geoJson(myData2, {
+        //-     style: function (geoJsonFeature) {
+        //-         return {}
+        //-     }
+        //- }).addTo(map);
+        L.geoJson(myData2, {
+            style: styleForMyData2
+        }).addTo(map);
+
+        // Mydata -> elektrownie
         L.geoJson(myData,{
             onEachFeature: function (feature, layer) {
                 var table = document.createElement('table');
