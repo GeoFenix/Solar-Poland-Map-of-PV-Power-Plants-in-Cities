@@ -117,4 +117,8 @@ block content
         var elektrowniaKrakow = L.marker([50.077568, 20.007923]).addTo(map);
         var elektrowniaWarszawa = L.marker([52.232135, 20.999478 ]).addTo(map);
 
+        elektrowniaWroclaw.bindTooltip("Elektrownia Wrocław", { permanent: true, direction: 'bottom' }).openTooltip();
+        elektrowniaKrakow.bindTooltip("Elektrownia Kraków", { permanent: true, direction: 'bottom' }).openTooltip();
+        elektrowniaWarszawa.bindTooltip("Elektrownia Warszawa", { permanent: true, direction: 'bottom' }).openTooltip();
+
         
