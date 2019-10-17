@@ -121,4 +121,20 @@ block content
         elektrowniaKrakow.bindTooltip("Elektrownia Kraków", { permanent: true, direction: 'bottom' }).openTooltip();
         elektrowniaWarszawa.bindTooltip("Elektrownia Warszawa", { permanent: true, direction: 'bottom' }).openTooltip();
 
+        //Funkcja zoomoujaca na elektrownie
+        function onClickZoomToElektrownia(event) {
+            console.log('function check')
+            console.log(event)
+            var marker = event.target;
+            var latLngs = [ marker.getLatLng() ];
+            var markerBounds = L.latLngBounds(latLngs);
+            map.fitBounds(markerBounds);
+        };
+
+        elektrowniaWroclaw.on('click', onClickZoomToElektrownia);
+        elektrowniaKrakow.on('click', onClickZoomToElektrownia);
+        elektrowniaWarszawa.on('click', onClickZoomToElektrownia);
+
+
+
         
