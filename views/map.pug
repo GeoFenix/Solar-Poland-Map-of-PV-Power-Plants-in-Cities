@@ -62,6 +62,24 @@ block content
         // Mydata -> elektrownie
         L.geoJson(myData,{
             onEachFeature: function (feature, layer) {
+                // Testy z polygon boundary
+                //- var latLngs = [feature.getLatLng() ];
+                //- var featureBounds = L.latLngBounds(latLngs);
+                //- var ElektowniaWroclawBounds = L.latLngBounds(featureBounds);
+                
+                console.log('Feature:');
+                var test = feature.geometry.coordinates;
+                console.log(test);
+                console.log('featureBounds._northEast.lat:');
+                var featureBounds = L.latLngBounds(test);
+                console.log(featureBounds._northEast.lng, featureBounds._northEast.lat);
+                var northEastLatitude = featureBounds._northEast.lat;
+                var northEastLongitude = featureBounds._northEast.lng;
+                var southWestLatitude = featureBounds._southWest.lat;
+                var southWestLongitude = featureBounds._southWest.lng;
+                console.log(northEastLongitude, northEastLatitude, southWestLongitude, southWestLatitude);
+                var ElektowniaWroclawBounds = [[northEastLongitude, northEastLatitude],[southWestLongitude, southWestLatitude]];
+
                 var table = document.createElement('table');
                 var tableHeader = document.createElement('thead');
                 var tableBody = document.createElement('tbody');
@@ -109,31 +127,49 @@ block content
                 //- layer.bindPopup(feature.properties.f3);
                 //- var $p = $('<p></p>')
                 //- layer.bindPopup(p);
+                //- layer.bindTooltip("Elektrownia Warszawa", { permanent: true, direction: 'bottom' });
+                
+                function onClickZoomToElektrownia(event) {
+                    //- console.log('function check')
+                    //- console.log(event)
+                    //- var marker = event.target;
+                    //- var latLngs = [ marker.getLatLng() ];
+                    //- var markerBounds = L.latLngBounds(latLngs);
+                    //- map.fitBounds(markerBounds);
+                    map.fitBounds(ElektowniaWroclawBounds);
+                };
+                var layerCenter = layer.getBounds().getCenter();
+                console.log('layerCenter');
+                console.log(layerCenter);
+                var elektrowniaWroclaw = L.marker(layerCenter).addTo(map);
+                elektrowniaWroclaw.on('click', onClickZoomToElektrownia);
+                elektrowniaWroclaw.bindTooltip("Elektrownia Wrocław", { permanent: true, direction: 'bottom' }).openTooltip();
             },
-            style: styleForMyData
+            style: styleForMyData, 
         }).addTo(map);
 
-        var elektrowniaWroclaw = L.marker([51.093303, 17.024241]).addTo(map);
-        var elektrowniaKrakow = L.marker([50.077568, 20.007923]).addTo(map);
-        var elektrowniaWarszawa = L.marker([52.232135, 20.999478 ]).addTo(map);
+        //- var elektrowniaWroclaw = L.marker([51.093303, 17.024241]).addTo(map);
+        //- var elektrowniaKrakow = L.marker([50.077568, 20.007923]).addTo(map);
+        //- var elektrowniaWarszawa = L.marker([52.232135, 20.999478 ]).addTo(map);
 
-        elektrowniaWroclaw.bindTooltip("Elektrownia Wrocław", { permanent: true, direction: 'bottom' }).openTooltip();
-        elektrowniaKrakow.bindTooltip("Elektrownia Kraków", { permanent: true, direction: 'bottom' }).openTooltip();
-        elektrowniaWarszawa.bindTooltip("Elektrownia Warszawa", { permanent: true, direction: 'bottom' }).openTooltip();
+        //- elektrowniaWroclaw.bindTooltip("Elektrownia Wrocław", { permanent: true, direction: 'bottom' }).openTooltip();
+        //- elektrowniaKrakow.bindTooltip("Elektrownia Kraków", { permanent: true, direction: 'bottom' }).openTooltip();
+        //- elektrowniaWarszawa.bindTooltip("Elektrownia Warszawa", { permanent: true, direction: 'bottom' }).openTooltip();
 
         //Funkcja zoomoujaca na elektrownie
         function onClickZoomToElektrownia(event) {
-            console.log('function check')
-            console.log(event)
-            var marker = event.target;
-            var latLngs = [ marker.getLatLng() ];
-            var markerBounds = L.latLngBounds(latLngs);
-            map.fitBounds(markerBounds);
+            //- console.log('function check')
+            //- console.log(event)
+            //- var marker = event.target;
+            //- var latLngs = [ marker.getLatLng() ];
+            //- var markerBounds = L.latLngBounds(latLngs);
+            //- map.fitBounds(markerBounds);
+            map.fitBounds(ElektowniaWroclawBounds);
         };
 
-        elektrowniaWroclaw.on('click', onClickZoomToElektrownia);
-        elektrowniaKrakow.on('click', onClickZoomToElektrownia);
-        elektrowniaWarszawa.on('click', onClickZoomToElektrownia);
+        //- elektrowniaWroclaw.on('click', onClickZoomToElektrownia);
+        //- elektrowniaKrakow.on('click', onClickZoomToElektrownia);
+        //- elektrowniaWarszawa.on('click', onClickZoomToElektrownia);
 
 
 
