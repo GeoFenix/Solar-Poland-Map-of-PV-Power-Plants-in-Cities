@@ -13,9 +13,9 @@ block content
         var myData = !{JSON.stringify(jsonData)};
         var myData2 = !{JSON.stringify(jsonData2)};
         // Create variable to hold map element, give initial settings to map
-        var map = L.map('map',{ center: [51.213728, 19.661492], zoom: 6});
+        var map = L.map('map', { center: [51.213728, 19.661492], zoom: 6, zoomControl: false});
         // Add OpenStreetMap tile layer to map element
-        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        var openStreetTile = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         	attribution: '© OpenStreetMap'
         }).addTo(map);
         // Testy innych tile Layer - ArcGIS World Imagery
@@ -23,11 +23,19 @@ block content
             '<a href="http://www.esri.com/">Esri</a>';
         var wholink = 
             'i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
-        L.tileLayer(
+        var worldImageryTile = L.tileLayer(
             'http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
             attribution: '&copy; '+mapLink+', '+wholink,
             maxZoom: 18,
             }).addTo(map);
+
+        var baseMaps = {
+            "OpenStreetMap": openStreetTile,
+            "Satellite - ArcGIS World Imagery ": worldImageryTile
+        };
+
+        L.control.layers(baseMaps).addTo(map);
+
         // Testy WMS tile Layer - DTM: http://mapy.geoportal.gov.pl/wss/service/wmsimg/guest/ISOK_HipsoDyn/ImageServer/WMSServer
         //- var nexrad = L.tileLayer.wms("http://mapy.geoportal.gov.pl/wss/service/wmsimg/guest/ISOK_HipsoDyn/ImageServer/WMSServer", {
         //-     //- layers: 'ISOK_HipsoDyn',
@@ -53,39 +61,41 @@ block content
         }).addTo(map);
 
 
-        var styleForMyData = {
-            color: "yellow",
-            weight: 1,
-            fillOpacity: 0
-        };
+        //- var styleForMyData = {
+        //-     color: "yellow",
+        //-     weight: 4,
+        //-     fillOpacity: 0
+        //- };
+
+        var styleForMyData = function(feature) {
+            var style1 = {
+                weight: 4,
+                fillOpacity: 0,
+                color: 'yellow'
+            };
+            var style2 = {
+                weight: 4,
+                fillOpacity: 0,
+                color: 'red'
+            };
+            switch (feature.properties.f2) {
+            case 'Wrocławska Elektrownia Słoneczna': return style1;
+            case 'Prototyp elektrowni słonecznej': return style2;
+            }
+        }
 
         // Mydata -> elektrownie
         L.geoJson(myData,{
             onEachFeature: function (feature, layer) {
-                // Testy z polygon boundary
-                //- var latLngs = [feature.getLatLng() ];
-                //- var featureBounds = L.latLngBounds(latLngs);
-                //- var ElektowniaWroclawBounds = L.latLngBounds(featureBounds);
                 
-                console.log('Feature:');
-                var test = feature.geometry.coordinates;
-                console.log(test);
-                console.log('featureBounds._northEast.lat:');
-                var featureBounds = L.latLngBounds(test);
-                console.log(featureBounds._northEast.lng, featureBounds._northEast.lat);
-                var northEastLatitude = featureBounds._northEast.lat;
-                var northEastLongitude = featureBounds._northEast.lng;
-                var southWestLatitude = featureBounds._southWest.lat;
-                var southWestLongitude = featureBounds._southWest.lng;
-                console.log(northEastLongitude, northEastLatitude, southWestLongitude, southWestLatitude);
-                var ElektowniaWroclawBounds = [[northEastLongitude, northEastLatitude],[southWestLongitude, southWestLatitude]];
-
+                // Box do wyswietlania atrybutow w popup (rozne wersje)
+                // 1) Tabela
                 var table = document.createElement('table');
                 var tableHeader = document.createElement('thead');
                 var tableBody = document.createElement('tbody');
                 var tableRow = document.createElement('tr');
 
-                var headers = ['Id', 'Nazwa spółdzielni', 'Rodzaj spółdzielni', 'Miasto', 'Rok oddania do użytku', 'Adres', 'Ilość instalacji', 'Rodzaj instalacji', 'Moc całkowita instalacji', 'Produkcja energii na rok', 'Koszty', 'Realizator', 'Prognozowana redukcja CO2 (na rok?)', 'Info URL']
+                var headers = ['Id', 'Etap projektu', 'Rodzaj spółdzielni', 'Miasto', 'Rok oddania do użytku', 'Adres', 'Ilość instalacji', 'Rodzaj instalacji', 'Moc całkowita instalacji', 'Produkcja energii na rok', 'Koszty', 'Realizator', 'Prognozowana redukcja CO2 (na rok?)', 'Info URL']
                 var thBox = []
                 for (var it = 0; it < headers.length; it++) {
                     var th = document.createElement('th');
@@ -129,48 +139,148 @@ block content
                 //- layer.bindPopup(p);
                 //- layer.bindTooltip("Elektrownia Warszawa", { permanent: true, direction: 'bottom' });
                 
-                function onClickZoomToElektrownia(event) {
-                    //- console.log('function check')
-                    //- console.log(event)
-                    //- var marker = event.target;
-                    //- var latLngs = [ marker.getLatLng() ];
-                    //- var markerBounds = L.latLngBounds(latLngs);
-                    //- map.fitBounds(markerBounds);
-                    map.fitBounds(ElektowniaWroclawBounds);
-                };
+                // Customowe ikony
+
+                var EtapProjektuIcon = L.Icon.extend({
+                    options: {
+                        iconSize:     [56.5, 36], // size of the icon
+                        iconAnchor:   [30.5, 34], // point of the icon which will correspond to marker'slocation
+                        popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+                    }
+                });
+
+                var elektrowniaIcon = new EtapProjektuIcon({iconUrl: 'images/ikona_elektrownia.png'});
+                var prototypIcon = new EtapProjektuIcon({iconUrl: 'images/ikona_prototyp.png'});
+
+                // Dodanie markera w centrum danej warstwy
+                var textForMarker = feature.properties.f2;
                 var layerCenter = layer.getBounds().getCenter();
-                console.log('layerCenter');
-                console.log(layerCenter);
-                var elektrowniaWroclaw = L.marker(layerCenter).addTo(map);
-                elektrowniaWroclaw.on('click', onClickZoomToElektrownia);
-                elektrowniaWroclaw.bindTooltip("Elektrownia Wrocław", { permanent: true, direction: 'bottom' }).openTooltip();
+                if (feature.properties.f2 === 'Prototyp elektrowni słonecznej'){
+                    var markerInCenter = L.marker(layerCenter, {icon: prototypIcon}).addTo(map);
+                } else {
+                    var markerInCenter = L.marker(layerCenter, {icon: elektrowniaIcon}).addTo(map);     
+                }
+                markerInCenter.bindTooltip(textForMarker, { permanent: true, direction: 'bottom' }).openTooltip();
+
+                //Funkcja na zoom po kliknieciu markera
+                function onClickZoomToElektrownia(event) {
+                    // Ustalanie boundary polygon
+                    var test = feature.geometry.coordinates;
+                    var featureBounds = L.latLngBounds(test);
+                    // Trzeba zamienić współrzedne miejscami - geojson i leaflet maja odwrtotnie
+                    var northEastLatitude = featureBounds._northEast.lat;
+                    var northEastLongitude = featureBounds._northEast.lng;
+                    var southWestLatitude = featureBounds._southWest.lat;
+                    var southWestLongitude = featureBounds._southWest.lng;
+                    var boundCoordinates = [[northEastLongitude, northEastLatitude],[southWestLongitude, southWestLatitude]];
+                    map.fitBounds(boundCoordinates);
+                };
+                markerInCenter.on('click', onClickZoomToElektrownia);
+                
             },
             style: styleForMyData, 
         }).addTo(map);
 
+        // home view control with easy button https://gis.stackexchange.com/questions/127286/home-button-leaflet-map
+        //- var home = {
+        //- lat: 51.213728,
+        //- lng: 19.661492,
+        //- zoom: 6
+        //- }; 
+
+        //- L.easyButton('fa-home', function (btn, map) {
+        //-     map.setView([home.lat, home.lng], home.zoom);
+        //- },'Zoom To Home').addTo(map);
+
+        var lat = 51.213728;
+        var lng = 19.661492;
+        var zoom = 6;
+
+        // set up the map and remove the default zoomControl
+        //- var map = L.map('map', {
+        //- zoomControl: false
+        //- });
+
+        // custom zoom bar control that includes a Zoom Home function
+        L.Control.zoomHome = L.Control.extend({
+            options: {
+                position: 'topright',
+                zoomInText: '+',
+                zoomInTitle: 'Zoom in',
+                zoomOutText: '-',
+                zoomOutTitle: 'Zoom out',
+                zoomHomeText: '<i class="fa fa-home" style="line-height:1.65;"></i>',
+                zoomHomeTitle: 'Zoom home'
+            },
+
+            onAdd: function (map) {
+            var controlName = 'gin-control-zoom',
+                container = L.DomUtil.create('div', controlName + ' leaflet-bar'),
+                options = this.options;
+            this._zoomInButton = this._createButton(options.zoomInText, options.zoomInTitle,
+            controlName + '-in', container, this._zoomIn);
+            this._zoomHomeButton = this._createButton(options.zoomHomeText, options.zoomHomeTitle,
+            controlName + '-home', container, this._zoomHome);
+            this._zoomOutButton = this._createButton(options.zoomOutText, options.zoomOutTitle,
+            controlName + '-out', container, this._zoomOut);
+            this._updateDisabled();
+            map.on('zoomend zoomlevelschange', this._updateDisabled, this);
+            return container;
+        },
+
+            onRemove: function (map) {
+                map.off('zoomend zoomlevelschange', this._updateDisabled, this);
+            },
+
+            _zoomIn: function (e) {
+                this._map.zoomIn(e.shiftKey ? 3 : 1);
+            },
+
+            _zoomOut: function (e) {
+                this._map.zoomOut(e.shiftKey ? 3 : 1);
+            },
+
+            _zoomHome: function (e) {
+                map.setView([lat, lng], zoom);
+            },
+
+            _createButton: function (html, title, className, container, fn) {
+                var link = L.DomUtil.create('a', className, container);
+                link.innerHTML = html;
+                link.href = '#';
+                link.title = title;
+
+                L.DomEvent.on(link, 'mousedown dblclick', L.DomEvent.stopPropagation)
+                    .on(link, 'click', L.DomEvent.stop)
+                    .on(link, 'click', fn, this)
+                    .on(link, 'click', this._refocusOnMap, this);
+
+                return link;
+            },
+
+            _updateDisabled: function () {
+                var map = this._map,
+                    className = 'leaflet-disabled';
+
+                L.DomUtil.removeClass(this._zoomInButton, className);
+                L.DomUtil.removeClass(this._zoomOutButton, className);
+
+                if (map._zoom === map.getMinZoom()) {
+                    L.DomUtil.addClass(this._zoomOutButton, className);
+                }
+                if (map._zoom === map.getMaxZoom()) {
+                    L.DomUtil.addClass(this._zoomInButton, className);
+                }
+            }
+        });
+
+        // add the new control to the map
+        var zoomHome = new L.Control.zoomHome();
+        zoomHome.addTo(map);
+
         //- var elektrowniaWroclaw = L.marker([51.093303, 17.024241]).addTo(map);
         //- var elektrowniaKrakow = L.marker([50.077568, 20.007923]).addTo(map);
-        //- var elektrowniaWarszawa = L.marker([52.232135, 20.999478 ]).addTo(map);
-
-        //- elektrowniaWroclaw.bindTooltip("Elektrownia Wrocław", { permanent: true, direction: 'bottom' }).openTooltip();
-        //- elektrowniaKrakow.bindTooltip("Elektrownia Kraków", { permanent: true, direction: 'bottom' }).openTooltip();
-        //- elektrowniaWarszawa.bindTooltip("Elektrownia Warszawa", { permanent: true, direction: 'bottom' }).openTooltip();
-
-        //Funkcja zoomoujaca na elektrownie
-        function onClickZoomToElektrownia(event) {
-            //- console.log('function check')
-            //- console.log(event)
-            //- var marker = event.target;
-            //- var latLngs = [ marker.getLatLng() ];
-            //- var markerBounds = L.latLngBounds(latLngs);
-            //- map.fitBounds(markerBounds);
-            map.fitBounds(ElektowniaWroclawBounds);
-        };
-
-        //- elektrowniaWroclaw.on('click', onClickZoomToElektrownia);
-        //- elektrowniaKrakow.on('click', onClickZoomToElektrownia);
-        //- elektrowniaWarszawa.on('click', onClickZoomToElektrownia);
-
+        //- var elektrowniaWarszawa = L.marker([52.232135, 20.999478 ]).addTo(map)
 
 
         
