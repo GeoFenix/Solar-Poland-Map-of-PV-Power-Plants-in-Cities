@@ -1,17 +1,31 @@
 extends layout
 block content
     <h1> Aktualne inicjatywy powstawania miejskich elektrowni słonecznych w Polsce </h1>
-    //- form(action='/filter')
-    //-     select(name='miasto')
-    //-         option(disabled='', selected='', value='') Select One...
-    //-         option(value='Warszawa') Spółdzielnia Budowlano-Mieszkaniowa "Zachód"
-    //-         option(value='Wrocław') Wrocławska Elektrownia Słoneczna Spółdzielni Mieszkaniowej Wrocław-Południe
-    //-         option(value='Kraków') Spółdzielnia Mieszkaniowa "Czyżyny"
-    //-     input(type='submit', value='Submit')
+    form(action='/map')
+        select(name='name')
+            option(disabled='', selected='', value='f2') Select One...
+            option(value='f2') Etap projektu
+            option(value='f3') Rodzaj spółdzielni
+            option(value='f4') Miasto
+            option(value='f5') Rok oddania do użytku
+            option(value='f6') Adres
+            option(value='f7') Ilość instalacji
+            option(value='f8') Rodzaj instalacji
+            option(value='f9') Moc całkowita instalacji
+            option(value='f10') Produkcja energii na rok
+            option(value='f11') Koszty
+            option(value='f12') Realizator
+            option(value='f13') Prognozowana redukcja CO2 (na rok?)
+            option(value='f14') Info URL
+        input(type='submit', value='Submit')
     #map
     script.
         var myData = !{JSON.stringify(jsonData)};
         var myData2 = !{JSON.stringify(jsonData2)};
+        var attributeParameter2 = !{JSON.stringify(attributeParameter)}
+        var attributeParameter3 = attributeParameter2.attribute;
+        console.log('attributeParameter2');
+        console.log(attributeParameter3);
         // Create variable to hold map element, give initial settings to map
         var map = L.map('map', { center: [51.213728, 19.661492], zoom: 6, zoomControl: false});
         // Add OpenStreetMap tile layer to map element
@@ -49,7 +63,7 @@ block content
         var p = 'czesc to ja'
 
         var styleForMyData2 = {
-            color: "yellow",
+            color: "#00FF00",
             weight: 2,
             //- opacity: 0.65, 
             //- dashArray: 3,
@@ -59,13 +73,6 @@ block content
         L.geoJson(myData2, {
             style: styleForMyData2
         }).addTo(map);
-
-
-        //- var styleForMyData = {
-        //-     color: "yellow",
-        //-     weight: 4,
-        //-     fillOpacity: 0
-        //- };
 
         var styleForMyData = function(feature) {
             var style1 = {
@@ -153,7 +160,7 @@ block content
                 var prototypIcon = new EtapProjektuIcon({iconUrl: 'images/ikona_prototyp.png'});
 
                 // Dodanie markera w centrum danej warstwy
-                var textForMarker = feature.properties.f2;
+                var textForMarker = feature.properties[attributeParameter3];
                 var layerCenter = layer.getBounds().getCenter();
                 if (feature.properties.f2 === 'Prototyp elektrowni słonecznej'){
                     var markerInCenter = L.marker(layerCenter, {icon: prototypIcon}).addTo(map);
@@ -181,30 +188,17 @@ block content
             style: styleForMyData, 
         }).addTo(map);
 
-        // home view control with easy button https://gis.stackexchange.com/questions/127286/home-button-leaflet-map
-        //- var home = {
-        //- lat: 51.213728,
-        //- lng: 19.661492,
-        //- zoom: 6
-        //- }; 
-
-        //- L.easyButton('fa-home', function (btn, map) {
-        //-     map.setView([home.lat, home.lng], home.zoom);
-        //- },'Zoom To Home').addTo(map);
+        // Adding home view control 
 
         var lat = 51.213728;
         var lng = 19.661492;
         var zoom = 6;
-
         // set up the map and remove the default zoomControl
-        //- var map = L.map('map', {
-        //- zoomControl: false
-        //- });
 
         // custom zoom bar control that includes a Zoom Home function
         L.Control.zoomHome = L.Control.extend({
             options: {
-                position: 'topright',
+                position: 'topleft',
                 zoomInText: '+',
                 zoomInTitle: 'Zoom in',
                 zoomOutText: '-',
@@ -226,7 +220,7 @@ block content
             this._updateDisabled();
             map.on('zoomend zoomlevelschange', this._updateDisabled, this);
             return container;
-        },
+            },
 
             onRemove: function (map) {
                 map.off('zoomend zoomlevelschange', this._updateDisabled, this);
@@ -278,9 +272,6 @@ block content
         var zoomHome = new L.Control.zoomHome();
         zoomHome.addTo(map);
 
-        //- var elektrowniaWroclaw = L.marker([51.093303, 17.024241]).addTo(map);
-        //- var elektrowniaKrakow = L.marker([50.077568, 20.007923]).addTo(map);
-        //- var elektrowniaWarszawa = L.marker([52.232135, 20.999478 ]).addTo(map)
 
 
         
