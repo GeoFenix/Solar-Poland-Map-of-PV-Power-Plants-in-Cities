@@ -53,3 +53,23 @@ td {
   text-decoration: none; 
   font: bold 18px 'Lucida Console', Monaco, monospace; 
 }
+
+/* Class for tooltip */
+.myCSSClass1 {
+  background-color: yellow;
+  font-weight: bold;
+  border-color: black
+}
+
+.myCSSClass2 {
+  background-color: orange;
+  font-weight: bold;
+  border-color: black
+}
+
+.leaflet-tooltip-left.myCSSClass::before {
+  border-left-color: red;
+}
+.leaflet-tooltip-right.myCSSClass::before {
+  border-right-color: red;
+}

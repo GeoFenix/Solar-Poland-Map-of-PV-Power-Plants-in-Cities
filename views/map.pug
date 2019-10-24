@@ -3,7 +3,7 @@ block content
     <h1> Aktualne inicjatywy powstawania miejskich elektrowni słonecznych w Polsce </h1>
     form(action='/map')
         select(name='name')
-            option(disabled='', selected='', value='f2') Select One...
+            //- option(='', selected='', value='')
             option(value='f2') Etap projektu
             option(value='f3') Rodzaj spółdzielni
             option(value='f4') Miasto
@@ -20,12 +20,21 @@ block content
         input(type='submit', value='Submit')
     #map
     script.
+    
         var myData = !{JSON.stringify(jsonData)};
         var myData2 = !{JSON.stringify(jsonData2)};
         var attributeParameter2 = !{JSON.stringify(attributeParameter)}
         var attributeParameter3 = attributeParameter2.attribute;
         console.log('attributeParameter2');
         console.log(attributeParameter3);
+        // Ustawienie default na option ze wskazadnym attributeParameter
+        var slice = attributeParameter3.slice(1)
+        console.log(slice);
+        var $currentOptions = $('option') 
+        
+        var $currentOptionOne = $currentOptions[slice - 2];
+        $($currentOptionOne).attr('selected','')
+        console.log();
         // Create variable to hold map element, give initial settings to map
         var map = L.map('map', { center: [51.213728, 19.661492], zoom: 6, zoomControl: false});
         // Add OpenStreetMap tile layer to map element
@@ -41,15 +50,7 @@ block content
             'http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
             attribution: '&copy; '+mapLink+', '+wholink,
             maxZoom: 18,
-            }).addTo(map);
-
-        var baseMaps = {
-            "OpenStreetMap": openStreetTile,
-            "Satellite - ArcGIS World Imagery ": worldImageryTile
-        };
-
-        L.control.layers(baseMaps).addTo(map);
-
+            }).addTo(map);    
         // Testy WMS tile Layer - DTM: http://mapy.geoportal.gov.pl/wss/service/wmsimg/guest/ISOK_HipsoDyn/ImageServer/WMSServer
         //- var nexrad = L.tileLayer.wms("http://mapy.geoportal.gov.pl/wss/service/wmsimg/guest/ISOK_HipsoDyn/ImageServer/WMSServer", {
         //-     //- layers: 'ISOK_HipsoDyn',
@@ -62,6 +63,7 @@ block content
         // Add JSON to map
         var p = 'czesc to ja'
 
+        // Style dla danych
         var styleForMyData2 = {
             color: "#00FF00",
             weight: 2,
@@ -70,7 +72,7 @@ block content
             fillOpacity: 0
         };
 
-        L.geoJson(myData2, {
+        var countryLines = L.geoJson(myData2, {
             style: styleForMyData2
         }).addTo(map);
 
@@ -83,7 +85,7 @@ block content
             var style2 = {
                 weight: 4,
                 fillOpacity: 0,
-                color: 'red'
+                color: 'orange'
             };
             switch (feature.properties.f2) {
             case 'Wrocławska Elektrownia Słoneczna': return style1;
@@ -91,8 +93,27 @@ block content
             }
         }
 
+        // Style dla tootlipow
+        //-  var styleForTooltip = function(feature) {
+        //-     var style1 = {
+        //-         weight: 4,
+        //-         fillOpacity: 0,
+        //-         color: 'yellow'
+        //-     };
+        //-     var style2 = {
+        //-         weight: 4,
+        //-         fillOpacity: 0,
+        //-         color: 'red'
+        //-     };
+        //-     switch (feature.properties.f2) {
+        //-     case 'Wrocławska Elektrownia Słoneczna': return style1;
+        //-     case 'Prototyp elektrowni słonecznej': return style2;
+        //-     }
+        //- }
+
         // Mydata -> elektrownie
-        L.geoJson(myData,{
+        var markersElektrownie = [];
+        var elektrownie = L.geoJson(myData,{
             onEachFeature: function (feature, layer) {
                 
                 // Box do wyswietlania atrybutow w popup (rozne wersje)
@@ -164,10 +185,13 @@ block content
                 var layerCenter = layer.getBounds().getCenter();
                 if (feature.properties.f2 === 'Prototyp elektrowni słonecznej'){
                     var markerInCenter = L.marker(layerCenter, {icon: prototypIcon}).addTo(map);
+                    markerInCenter.bindTooltip(textForMarker, { permanent: true, direction: 'bottom', className: 'myCSSClass2' }).openTooltip();
+                    markersElektrownie.push(markerInCenter)
                 } else {
-                    var markerInCenter = L.marker(layerCenter, {icon: elektrowniaIcon}).addTo(map);     
+                    var markerInCenter = L.marker(layerCenter, {icon: elektrowniaIcon}).addTo(map);
+                    markerInCenter.bindTooltip(textForMarker, { permanent: true, direction: 'bottom', className: 'myCSSClass1' }).openTooltip();
+                    markersElektrownie.push(markerInCenter)     
                 }
-                markerInCenter.bindTooltip(textForMarker, { permanent: true, direction: 'bottom' }).openTooltip();
 
                 //Funkcja na zoom po kliknieciu markera
                 function onClickZoomToElektrownia(event) {
@@ -271,6 +295,23 @@ block content
         // add the new control to the map
         var zoomHome = new L.Control.zoomHome();
         zoomHome.addTo(map);
+
+        // Map controls
+        var baseMaps = {
+            "OpenStreetMap": openStreetTile,
+            "Satellite - ArcGIS World Imagery ": worldImageryTile
+        };
+
+        var markersElektrownieLayer = L.layerGroup(markersElektrownie);
+        console.log(markersElektrownie)
+
+        var overlayMaps = {
+            "Country boundries": countryLines,
+            "Poligony miejskich elektrowni słoneczncyh": elektrownie,
+            "Markery miejskich elektrowni słonecznych": markersElektrownieLayer
+        };
+
+        L.control.layers(baseMaps, overlayMaps).addTo(map);
 
 
 
