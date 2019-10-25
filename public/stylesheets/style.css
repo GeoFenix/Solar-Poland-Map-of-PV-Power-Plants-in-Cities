@@ -1,5 +1,5 @@
-/* Style do tabeli z atrybutami*/
 
+/* Style do tabeli z atrybutami*/
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -55,21 +55,34 @@ td {
 }
 
 /* Class for tooltip */
-.myCSSClass1 {
+.styleForElektrownia {
   background-color: yellow;
   font-weight: bold;
   border-color: black
 }
 
-.myCSSClass2 {
+.styleForPrototyp {
   background-color: orange;
   font-weight: bold;
   border-color: black
 }
 
-.leaflet-tooltip-left.myCSSClass::before {
-  border-left-color: red;
+/* .custom .leaflet-popup-content {
+    background: #e93434;
+    color: black;
+    max-width: 1000px;
+    /* display: inline-block */
+/* } */ 
+
+
+.custom .leaflet-popup-content-wrapper {
+  color: black;
+  width: 740px;
 }
-.leaflet-tooltip-right.myCSSClass::before {
-  border-right-color: red;
-}
+
+/* .leaflet-tooltip.styleForPrototyp::before {
+  color: red;
+} 
+.leaflet-tooltip.styleForPrototyp::before {
+  color: red;
+}  */

@@ -20,21 +20,18 @@ block content
         input(type='submit', value='Submit')
     #map
     script.
-    
+        // Przypisanie danych z backendu
         var myData = !{JSON.stringify(jsonData)};
         var myData2 = !{JSON.stringify(jsonData2)};
-        var attributeParameter2 = !{JSON.stringify(attributeParameter)}
-        var attributeParameter3 = attributeParameter2.attribute;
-        console.log('attributeParameter2');
-        console.log(attributeParameter3);
-        // Ustawienie default na option ze wskazadnym attributeParameter
-        var slice = attributeParameter3.slice(1)
-        console.log(slice);
-        var $currentOptions = $('option') 
+        var attributeParameter = !{JSON.stringify(attributeParameter)}
+        var currentCategory = attributeParameter.attribute;
+        console.log('currentCategory');
+        console.log(currentCategory);
         
-        var $currentOptionOne = $currentOptions[slice - 2];
-        $($currentOptionOne).attr('selected','')
-        console.log();
+        //Ustawienie biezacej opcji select
+        var $currentCategoryOptionEl = $('option[value="' + currentCategory + '"]');
+        $($currentCategoryOptionEl).attr('selected','')
+
         // Create variable to hold map element, give initial settings to map
         var map = L.map('map', { center: [51.213728, 19.661492], zoom: 6, zoomControl: false});
         // Add OpenStreetMap tile layer to map element
@@ -135,9 +132,18 @@ block content
                 
                 var properties = feature.properties
                 var tdBox = [];
+                var propertiesKeys = Object.keys(properties);
+                var propertiesLength = propertiesKeys.length;
                 for (var value in properties) {
                     var td = document.createElement('td');
-                    td.innerText = properties[value];
+                    if (value === 'f' + propertiesLength) {
+                        var a = $('<a href="' + properties[value] + '" target="_blank">' + properties[value] + '</a>');
+                        //- var a = document.createElement('a');
+                        //- a.innerText = properties[value];
+                        td.appendChild(a[0]);
+                    } else {
+                        td.innerText = properties[value];
+                    }
                     tableRow.appendChild(td);
                     tdBox.push(td)
                 };
@@ -160,12 +166,18 @@ block content
                     ul.appendChild(li);
                 }
                 console.log(ul);
-          
-                layer.bindPopup(table2);
-                //- layer.bindPopup(feature.properties.f3);
-                //- var $p = $('<p></p>')
-                //- layer.bindPopup(p);
-                //- layer.bindTooltip("Elektrownia Warszawa", { permanent: true, direction: 'bottom' });
+
+                var customOptions = {
+                    //- maxWidth: '1000',
+                    className : 'custom'
+                }
+
+                layer.bindPopup(table2, customOptions);
+                // Usuwamy style z atrybutow okienka popup zeby sie dopasował do zawartości
+                layer.on('click', function(e){
+                    var $popup = $('.leaflet-popup-content');
+                    $popup.attr('style', '')
+                })
                 
                 // Customowe ikony
 
@@ -181,15 +193,15 @@ block content
                 var prototypIcon = new EtapProjektuIcon({iconUrl: 'images/ikona_prototyp.png'});
 
                 // Dodanie markera w centrum danej warstwy
-                var textForMarker = feature.properties[attributeParameter3];
+                var textForMarker = feature.properties[currentCategory];
                 var layerCenter = layer.getBounds().getCenter();
                 if (feature.properties.f2 === 'Prototyp elektrowni słonecznej'){
                     var markerInCenter = L.marker(layerCenter, {icon: prototypIcon}).addTo(map);
-                    markerInCenter.bindTooltip(textForMarker, { permanent: true, direction: 'bottom', className: 'myCSSClass2' }).openTooltip();
+                    markerInCenter.bindTooltip(textForMarker, { permanent: true, direction: 'bottom', className: 'styleForPrototyp' }).openTooltip();
                     markersElektrownie.push(markerInCenter)
                 } else {
                     var markerInCenter = L.marker(layerCenter, {icon: elektrowniaIcon}).addTo(map);
-                    markerInCenter.bindTooltip(textForMarker, { permanent: true, direction: 'bottom', className: 'myCSSClass1' }).openTooltip();
+                    markerInCenter.bindTooltip(textForMarker, { permanent: true, direction: 'bottom', className: 'styleForElektrownia' }).openTooltip();
                     markersElektrownie.push(markerInCenter)     
                 }
 
