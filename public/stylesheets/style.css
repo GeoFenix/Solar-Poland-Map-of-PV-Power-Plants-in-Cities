@@ -1,7 +1,6 @@
-
-/* Style do tabeli z atrybutami*/
+/* Style general layout*/
 body {
-  padding: 50px;
+  padding: 5px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   color: white;
   background-color: black
@@ -11,10 +10,14 @@ a {
   color: #00B7FF;
 }
 
+/* Style for map*/
 #map {
   width: 100%;
-  height: 600px;
+  /* height: 600px; */
+  height: 700px;
 }
+
+/* Style for <table> element put into popup window with attributes */
 
 table {
   border: solid 2px black;
@@ -39,7 +42,7 @@ td {
   padding: 5px
 }
 
-/* Style do map controls */
+/* Style for map home and zoom controls */
 
 .leaflet-bar a { 
   background-color: #fff; 
@@ -61,28 +64,176 @@ td {
   border-color: black
 }
 
-.styleForPrototyp {
+.styleForPilotaz {
   background-color: orange;
   font-weight: bold;
   border-color: black
 }
-
-/* .custom .leaflet-popup-content {
-    background: #e93434;
-    color: black;
-    max-width: 1000px;
-    /* display: inline-block */
-/* } */ 
-
 
 .custom .leaflet-popup-content-wrapper {
   color: black;
   width: 740px;
 }
 
-/* .leaflet-tooltip.styleForPrototyp::before {
-  color: red;
-} 
-.leaflet-tooltip.styleForPrototyp::before {
-  color: red;
-}  */
+/* Style do wydzielenia, na bazie only */
+header {
+  background-image: url("/images/header_footer_tło.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  min-height: 8vh;
+  color: white;
+}
+
+.l-header--bold {
+  font-weight: bold;
+  text-align: center;
+}
+
+.l-header__logo {
+  display: inline-block;
+  width: 10%;
+  /* padding: 10px 5px; */
+  padding: 0px;
+  margin: 0px;
+  vertical-align: middle;
+}
+
+.l-header__nav {
+  width: 60%;
+  display: inline-block;
+  vertical-align: middle
+}
+
+footer {
+  background-image: url("/images/header_footer_tło.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: table;
+  width: 100%;
+  min-height: 8vh;
+  text-align: center;	
+}
+
+/* footer {
+  background-color: black;
+  padding: 20px;
+  color: white;
+background-position: center;
+background-image: url("logo.png");
+background-repeat: no-repeat;
+background-size: cover;
+text-align: center;
+  font-size: 15px;
+} */
+
+footer p {
+  /* display: table-cell; */
+  display: block;
+  color: grey;
+  font-size: 16px;
+  /* vertical-align: middle; */
+  text-align: center
+}
+
+footer .contactjola {
+  max-width: 30%;
+  height: auto;
+  background-color: black;
+}
+
+nav li {
+	display: inline-block;
+	list-style: none;
+
+	margin-left: 1%;
+	margin-right: 1%;
+	padding: 10px 5px; /* na razie tu daje padding */
+
+	font-size: 14px;
+}
+
+nav a {
+	text-decoration: none;
+	/* padding: 18px 5px;  tu coś dziwnego przesuwa jak dam padding na a */
+}
+
+nav a:link {
+	color: none;
+}
+
+nav a:visited {
+	color: white;
+}
+
+nav a:hover {
+	background: yellow
+}
+
+nav a:active {
+	background: green
+}
+
+/* z Components */
+.c-img_logo_left {
+	width: 160px;
+  height: auto;
+}
+
+.c-img_logo_right {
+	width: 80px;
+  height: auto;
+}
+
+.l-hero {
+  /* background-image: "/images/BusinessCard_GeoFenix.png"; */
+	/* background-image: url("/images/hero_section.png"); */
+  
+
+	position:relative;
+	
+	min-height: 80vh;
+
+	/* background-position: @section-hero-bg-position;  */
+	background-repeat: no-repeat;
+  background-size: cover;
+  
+}
+
+.l-hero__content {
+  position: absolute;
+  left: 64%;
+  top: 60%;
+}
+
+.l-hero__text {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.l-hero__text__name {
+  color: white;
+  font-size: 50px;
+}
+		
+.l-hero__text__job {
+  margin-top:0px;
+  font-size: 20px;
+  color: white;
+}
+		
+.l-hero__button {
+  height: 50px;
+  width: 170px;
+  border-bottom: 2px;
+  border-radius: 20px;
+
+  color: black;
+  background-color: orange;
+  
+  font-size: 16px;
+  font-style: Arial, sans-serif;
+  font-weight: bold;
+}

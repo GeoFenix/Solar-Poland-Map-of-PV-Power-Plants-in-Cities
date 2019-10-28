@@ -1,0 +1,329 @@
+extends layout
+block content
+    <h1> Aktualne inicjatywy powstawania miejskich elektrowni słonecznych w Polsce </h1>
+    form(action='/map')
+        select(name='name')
+            //- option(='', selected='', value='')
+            option(value='f2') Etap projektu
+            option(value='f3') Rodzaj spółdzielni
+            option(value='f4') Miasto
+            option(value='f5') Rok oddania do użytku
+            option(value='f6') Adres
+            option(value='f7') Ilość instalacji
+            option(value='f8') Rodzaj instalacji
+            option(value='f9') Moc całkowita instalacji
+            option(value='f10') Produkcja energii na rok
+            option(value='f11') Koszty
+            option(value='f12') Realizator
+            option(value='f13') Prognozowana redukcja CO2 (na rok?)
+            option(value='f14') Info URL
+        input(type='submit', value='Submit')
+    //- div for leaflet map
+    #map
+    script.
+        // - Passing variables from backend
+        var solarPowerPlants = !{JSON.stringify(jsonData)};
+        var countryLines = !{JSON.stringify(jsonData2)};
+        var attributeParameter = !{JSON.stringify(attributeParameter)}
+    script(src="javascripts/map.js")
+    //-     //Setting current selected form option 
+    //-     var currentCategory = attributeParameter.attribute;
+    //-     var $formOptionSelected = $('option[value="' + currentCategory + '"]');
+    //-     $formOptionSelected.attr('selected','');
+
+    //-     // Create variable to hold map element, give initial settings to map
+    //-     var map = L.map('map', { center: [51.213728, 19.661492], zoom: 6, zoomControl: false});
+    //-     // Add OpenStreetMap tile layer to map element
+    //-     var openStreetTile = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    //-     	attribution: '© OpenStreetMap'
+    //-     }).addTo(map);
+    //-     // Testy innych tile Layer - ArcGIS World Imagery
+    //-     var mapLink = 
+    //-         '<a href="http://www.esri.com/">Esri</a>';
+    //-     var wholink = 
+    //-         'i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
+    //-     var worldImageryTile = L.tileLayer(
+    //-         'http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    //-         attribution: '&copy; '+mapLink+', '+wholink,
+    //-         maxZoom: 18,
+    //-         }).addTo(map);    
+    //-     // Testy WMS tile Layer - DTM: http://mapy.geoportal.gov.pl/wss/service/wmsimg/guest/ISOK_HipsoDyn/ImageServer/WMSServer
+    //-     //- var nexrad = L.tileLayer.wms("http://mapy.geoportal.gov.pl/wss/service/wmsimg/guest/ISOK_HipsoDyn/ImageServer/WMSServer", {
+    //-     //-     //- layers: 'ISOK_HipsoDyn',
+    //-     //-     format: 'image/jpeg',
+    //-     //-     transparent: true,
+    //-     //-     attribution: "ISOK_HipsoDyn"
+    //-     //- }).addTo(map);;
+
+        
+    //-     // Add JSON to map
+    //-     var p = 'czesc to ja'
+
+    //-     // Style dla danych
+    //-     var styleForcountryLines = {
+    //-         color: "#00FF00",
+    //-         weight: 2,
+    //-         //- opacity: 0.65, 
+    //-         //- dashArray: 3,
+    //-         fillOpacity: 0
+    //-     };
+
+    //-     var countryLines = L.geoJson(countryLines, {
+    //-         style: styleForcountryLines
+    //-     }).addTo(map);
+
+    //-     var styleForSolarPowerPlants = function(feature) {
+    //-         var style1 = {
+    //-             weight: 4,
+    //-             fillOpacity: 0,
+    //-             color: 'yellow'
+    //-         };
+    //-         var style2 = {
+    //-             weight: 4,
+    //-             fillOpacity: 0,
+    //-             color: 'orange'
+    //-         };
+    //-         switch (feature.properties.f2) {
+    //-         case 'Wrocławska Elektrownia Słoneczna': return style1;
+    //-         case 'Prototyp elektrowni słonecznej': return style2;
+    //-         }
+    //-     }
+
+    //-     // Style dla tootlipow
+    //-     //-  var styleForTooltip = function(feature) {
+    //-     //-     var style1 = {
+    //-     //-         weight: 4,
+    //-     //-         fillOpacity: 0,
+    //-     //-         color: 'yellow'
+    //-     //-     };
+    //-     //-     var style2 = {
+    //-     //-         weight: 4,
+    //-     //-         fillOpacity: 0,
+    //-     //-         color: 'red'
+    //-     //-     };
+    //-     //-     switch (feature.properties.f2) {
+    //-     //-     case 'Wrocławska Elektrownia Słoneczna': return style1;
+    //-     //-     case 'Prototyp elektrowni słonecznej': return style2;
+    //-     //-     }
+    //-     //- }
+
+    //-     // solarPowerPlants -> elektrownie
+    //-     var markersElektrownie = [];
+    //-     var elektrownie = L.geoJson(solarPowerPlants,{
+    //-         onEachFeature: function (feature, layer) {
+                
+    //-             // Box do wyswietlania atrybutow w popup (rozne wersje)
+    //-             // 1) Tabela
+    //-             var table = document.createElement('table');
+    //-             var tableHeader = document.createElement('thead');
+    //-             var tableBody = document.createElement('tbody');
+    //-             var tableRow = document.createElement('tr');
+
+    //-             var headers = ['Id', 'Etap projektu', 'Rodzaj spółdzielni', 'Miasto', 'Rok oddania do użytku', 'Adres', 'Ilość instalacji', 'Rodzaj instalacji', 'Moc całkowita instalacji', 'Produkcja energii na rok', 'Koszty', 'Realizator', 'Prognozowana redukcja CO2 (na rok?)', 'Info URL']
+    //-             var thBox = []
+    //-             for (var it = 0; it < headers.length; it++) {
+    //-                 var th = document.createElement('th');
+    //-                 th.innerText = headers[it];
+    //-                 tableHeader.appendChild(th)
+    //-                 thBox.push(th)
+    //-             }
+    //-             console.log(thBox)
+                
+    //-             var properties = feature.properties
+    //-             var tdBox = [];
+    //-             var propertiesKeys = Object.keys(properties);
+    //-             var propertiesLength = propertiesKeys.length;
+    //-             for (var value in properties) {
+    //-                 var td = document.createElement('td');
+    //-                 if (value === 'f' + propertiesLength) {
+    //-                     var a = $('<a href="' + properties[value] + '" target="_blank">' + properties[value] + '</a>');
+    //-                     //- var a = document.createElement('a');
+    //-                     //- a.innerText = properties[value];
+    //-                     td.appendChild(a[0]);
+    //-                 } else {
+    //-                     td.innerText = properties[value];
+    //-                 }
+    //-                 tableRow.appendChild(td);
+    //-                 tdBox.push(td)
+    //-             };
+
+    //-             console.log(tdBox)
+
+    //-             var table2 = document.createElement('table');
+    //-             for (var it = 0; it < headers.length; it++) {
+    //-                 var tableRow2 = document.createElement('tr');
+    //-                 tableRow2.appendChild(thBox[it]);
+    //-                 tableRow2.appendChild(tdBox[it]);
+    //-                 table2.appendChild(tableRow2);
+    //-             }
+    //-             console.log(table2)
+
+    //-             var ul = document.createElement('ul');
+    //-             for (var it = 0; it < headers.length; it++) {
+    //-                 var li = document.createElement('li');
+    //-                 li.innerText = headers[it] + ': ' + feature.properties['f' + (it + 1)];
+    //-                 ul.appendChild(li);
+    //-             }
+    //-             console.log(ul);
+
+    //-             var customOptions = {
+    //-                 //- maxWidth: '1000',
+    //-                 className : 'custom'
+    //-             }
+
+    //-             layer.bindPopup(table2, customOptions);
+    //-             // Usuwamy style z atrybutow okienka popup zeby sie dopasował do zawartości
+    //-             layer.on('click', function(e){
+    //-                 var $popup = $('.leaflet-popup-content');
+    //-                 $popup.attr('style', '')
+    //-             })
+                
+    //-             // Customowe ikony
+
+    //-             var EtapProjektuIcon = L.Icon.extend({
+    //-                 options: {
+    //-                     iconSize:     [56.5, 36], // size of the icon
+    //-                     iconAnchor:   [30.5, 34], // point of the icon which will correspond to marker'slocation
+    //-                     popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+    //-                 }
+    //-             });
+
+    //-             var elektrowniaIcon = new EtapProjektuIcon({iconUrl: 'images/ikona_elektrownia.png'});
+    //-             var prototypIcon = new EtapProjektuIcon({iconUrl: 'images/ikona_prototyp.png'});
+
+    //-             // Dodanie markera w centrum danej warstwy
+    //-             var textForMarker = feature.properties[currentCategory];
+    //-             var layerCenter = layer.getBounds().getCenter();
+    //-             if (feature.properties.f2 === 'Prototyp elektrowni słonecznej'){
+    //-                 var markerInCenter = L.marker(layerCenter, {icon: prototypIcon}).addTo(map);
+    //-                 markerInCenter.bindTooltip(textForMarker, { permanent: true, direction: 'bottom', className: 'styleForPrototyp' }).openTooltip();
+    //-                 markersElektrownie.push(markerInCenter)
+    //-             } else {
+    //-                 var markerInCenter = L.marker(layerCenter, {icon: elektrowniaIcon}).addTo(map);
+    //-                 markerInCenter.bindTooltip(textForMarker, { permanent: true, direction: 'bottom', className: 'styleForElektrownia' }).openTooltip();
+    //-                 markersElektrownie.push(markerInCenter)     
+    //-             }
+
+    //-             //Funkcja na zoom po kliknieciu markera
+    //-             function onClickZoomToElektrownia(event) {
+    //-                 // Ustalanie boundary polygon
+    //-                 var test = feature.geometry.coordinates;
+    //-                 var featureBounds = L.latLngBounds(test);
+    //-                 // Trzeba zamienić współrzedne miejscami - geojson i leaflet maja odwrtotnie
+    //-                 var northEastLatitude = featureBounds._northEast.lat;
+    //-                 var northEastLongitude = featureBounds._northEast.lng;
+    //-                 var southWestLatitude = featureBounds._southWest.lat;
+    //-                 var southWestLongitude = featureBounds._southWest.lng;
+    //-                 var boundCoordinates = [[northEastLongitude, northEastLatitude],[southWestLongitude, southWestLatitude]];
+    //-                 map.fitBounds(boundCoordinates);
+    //-             };
+    //-             markerInCenter.on('click', onClickZoomToElektrownia);
+                
+    //-         },
+    //-         style: styleForSolarPowerPlants, 
+    //-     }).addTo(map);
+
+    //-     // Adding home view control 
+
+    //-     var lat = 51.213728;
+    //-     var lng = 19.661492;
+    //-     var zoom = 6;
+    //-     // set up the map and remove the default zoomControl
+
+    //-     // custom zoom bar control that includes a Zoom Home function
+    //-     L.Control.zoomHome = L.Control.extend({
+    //-         options: {
+    //-             position: 'topleft',
+    //-             zoomInText: '+',
+    //-             zoomInTitle: 'Zoom in',
+    //-             zoomOutText: '-',
+    //-             zoomOutTitle: 'Zoom out',
+    //-             zoomHomeText: '<i class="fa fa-home" style="line-height:1.65;"></i>',
+    //-             zoomHomeTitle: 'Zoom home'
+    //-         },
+
+    //-         onAdd: function (map) {
+    //-         var controlName = 'gin-control-zoom',
+    //-             container = L.DomUtil.create('div', controlName + ' leaflet-bar'),
+    //-             options = this.options;
+    //-         this._zoomInButton = this._createButton(options.zoomInText, options.zoomInTitle,
+    //-         controlName + '-in', container, this._zoomIn);
+    //-         this._zoomHomeButton = this._createButton(options.zoomHomeText, options.zoomHomeTitle,
+    //-         controlName + '-home', container, this._zoomHome);
+    //-         this._zoomOutButton = this._createButton(options.zoomOutText, options.zoomOutTitle,
+    //-         controlName + '-out', container, this._zoomOut);
+    //-         this._updateDisabled();
+    //-         map.on('zoomend zoomlevelschange', this._updateDisabled, this);
+    //-         return container;
+    //-         },
+
+    //-         onRemove: function (map) {
+    //-             map.off('zoomend zoomlevelschange', this._updateDisabled, this);
+    //-         },
+
+    //-         _zoomIn: function (e) {
+    //-             this._map.zoomIn(e.shiftKey ? 3 : 1);
+    //-         },
+
+    //-         _zoomOut: function (e) {
+    //-             this._map.zoomOut(e.shiftKey ? 3 : 1);
+    //-         },
+
+    //-         _zoomHome: function (e) {
+    //-             map.setView([lat, lng], zoom);
+    //-         },
+
+    //-         _createButton: function (html, title, className, container, fn) {
+    //-             var link = L.DomUtil.create('a', className, container);
+    //-             link.innerHTML = html;
+    //-             link.href = '#';
+    //-             link.title = title;
+
+    //-             L.DomEvent.on(link, 'mousedown dblclick', L.DomEvent.stopPropagation)
+    //-                 .on(link, 'click', L.DomEvent.stop)
+    //-                 .on(link, 'click', fn, this)
+    //-                 .on(link, 'click', this._refocusOnMap, this);
+
+    //-             return link;
+    //-         },
+
+    //-         _updateDisabled: function () {
+    //-             var map = this._map,
+    //-                 className = 'leaflet-disabled';
+
+    //-             L.DomUtil.removeClass(this._zoomInButton, className);
+    //-             L.DomUtil.removeClass(this._zoomOutButton, className);
+
+    //-             if (map._zoom === map.getMinZoom()) {
+    //-                 L.DomUtil.addClass(this._zoomOutButton, className);
+    //-             }
+    //-             if (map._zoom === map.getMaxZoom()) {
+    //-                 L.DomUtil.addClass(this._zoomInButton, className);
+    //-             }
+    //-         }
+    //-     });
+
+    //-     // add the new control to the map
+    //-     var zoomHome = new L.Control.zoomHome();
+    //-     zoomHome.addTo(map);
+
+    //-     // Map controls
+    //-     var baseMaps = {
+    //-         "OpenStreetMap": openStreetTile,
+    //-         "Satellite - ArcGIS World Imagery ": worldImageryTile
+    //-     };
+
+    //-     var markersElektrownieLayer = L.layerGroup(markersElektrownie);
+    //-     console.log(markersElektrownie)
+
+    //-     var overlayMaps = {
+    //-         "Country boundries": countryLines,
+    //-         "Poligony miejskich elektrowni słoneczncyh": elektrownie,
+    //-         "Markery miejskich elektrowni słonecznych": markersElektrownieLayer
+    //-     };
+
+    //-     L.control.layers(baseMaps, overlayMaps).addTo(map);
+
+
+
+        

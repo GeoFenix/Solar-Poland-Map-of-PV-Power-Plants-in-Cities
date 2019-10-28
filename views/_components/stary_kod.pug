@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Solar Belgrade: solar energy objects map</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+	background-color: black;
+	font-family: Arial, Helvetica, sans-serif;	
+}
+
+header {
+	background-image: url("logo.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+    padding: 10px;
+	text-align: center;
+    font-size: 16px;
+    color: white;
+}
+
+.title {
+    width: auto;
+	text-align: center;
+	color: yellow;
+	text-shadow: 3px -3px 10px black;
+}
+
+.details {
+	width: 35%;
+	height: auto;
+	text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+	background-color: black;
+	padding: 0px;
+}
+
+.description {
+	width: 75%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+	background-color: black;
+	padding: 0.5px 1px;
+}
+
+article {
+    padding: 10px;
+    width: 100%;
+    height: auto;
+	text-align: center;
+	margin-top: 2vh;
+}
+
+section {
+	background-image: url("IMG_Belgrade.jpg");
+	background-attachment: fixed;
+	background-size: cover;
+    content: "";
+    clear: both;
+	padding: 10px;
+}
+
+img {
+    max-width: 60%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mapbrowser {
+	margin-left: 20px;
+}
+
+.feedback {
+	color: white;
+}
+
+.scrolldown {
+	color: white;
+	margin-top: 7vh;
+}
+
+.upper {
+    margin-top: 25vh;
+}
+
+.lower {
+    margin-top: 10vh;
+}
+
+.dataused {
+	color: white;
+	margin-top: 7vh;
+	text-align: left;
+	max-width: 60%;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: black;
+	padding: 1px;
+}
+
+footer {
+    background-color: black;
+    padding: 20px;
+    color: white;
+	background-position: center;
+	background-image: url("logo.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	text-align: center;
+    font-size: 15px;
+}
+
+.contactjola {
+    max-width: 30%;
+	height: auto;
+	background-color: black;
+}
+
+.webmaster {
+	padding: 3px;
+	float: centre;
+	background-color: black;
+	font-size: 20px;
+	margin-top: 2vh;
+}
+
+a {
+	color: magenta;
+}
+
+a.mapbrowser {
+	color: yellow;
+}
+
+        /**/
+        
+</style>
+</head>
+<body>
+
+<header>
+	<div class="title">
+		<h2>Climate Change&Sustainability Project:</h2>
+		<h1>SOLAR BELGRADE</h1>
+		<h2>Database & map of existing solar power plant locations in Belgrade, Serbia</h2>
+	</div>
+	<div class="details">
+		<p>Within: 
+			<a href="https://pioneers.climate-kic.org/" target="_blank">Climate-KIC Pioneers Into Practice Mobility Programme</a>
+			<br/>Author: 
+			<a href="#jolacontact">Jolanta Pilch</a>
+			<br/>Hosting company: Global Sustainability Experts
+		</p>
+	</div>
+	<div class="description">
+		<p> <strong>Description</strong>: Within the Solar Belgrade project (October 2018, Belgrade, Serbia) I was working on the topic related to solar energy market in Serbia. 
+		From the social point of view I was applying System Innovation tools to define the status quo of solar energy sector and to identify its main challenges. 
+		The technical part of my project focused on mapping the potential locations for the new solar PV installations (for business opportunities) as well as existing solar power plants in Belgrade. 
+		The result of the latter, a simple GIS map application, can be found below and is aimed to promote solar energy initiatives undertaken so far in Belgrade.  
+		</p>
+	</div>
+</header>
+
+<section>
+	<article>
+		<div class="feedback">
+			<h2>
+				<a href="https://qgiscloud.com/SolarBelgradeExist/SolarBelgrade_Existing_Solar_Panels_to_web/" target="_blank" class="mapbrowser">SOLAR BELGRADE GIS MAP APPLICATION* </a>
+			</h2>
+			<h3> *This is a working version - help us to improve it 
+			<br/>Test the page and send your feedback on: solarbelgrade2018@gmail.com</h3>
+		</div>
+		<div class="scrolldown">	
+			<h3> Scroll down for the map viewer details and instruction	</h3>
+		</div>
+		<div class="upper feedback">
+			<h3>How to use the GIS map application? (it's really simple):</h3>
+			<img src="qgis_cloud1_.jpg">
+		</div>
+		<div class="lower">
+			<img src="qgis_cloud2_.jpg">
+		</div>
+		<div class="dataused">
+			<h4>Public available data sources and software which were used in this project:
+				<ul>
+					<li>Internet reserach (see links in the Solar Belgrade GIS map application) </li>
+					<li><a href="http://www.mapcruzin.com/free-serbia-country-city-place-gis-shapefiles.html" target="_blank"> http://www.mapcruzin.com/free-serbia-country-city-place-gis-shapefiles.html</a></li>
+					<li><a href="https://a3.geosrbija.rs/" target="_blank">https://a3.geosrbija.rs/</a> </li>
+					<li><a href="http://katastar.rgz.gov.rs/KnWebPublic/PublicAccess.aspx" target="_blank">http://katastar.rgz.gov.rs/KnWebPublic/PublicAccess.aspx</a> </li>
+					<li>QGIS version 2.18.20 (Free GIS software, visit <a href="https://qgis.org/en/site/forusers/download.html" target="_blank">https://qgis.org/en/site/forusers/download.html</a>)</li>
+					<li>Postgresql/PostGIS (Free relational database system, visit <a href="https://www.postgresql.org/" target="_blank">https://www.postgresql.org/</a>)</li>
+					<li>QGIS Cloud (Free QGIS Web-GIS platform, visit <a href="https://qgiscloud.com/" target="_blank">https://qgiscloud.com/</a>)</li>
+					<li>QGIS OpenLayers Plugin: Bing Maps (Free for educational or non-profit organisation, see <a href="https://www.microsoft.com/en-us/maps/product" target="_blank">Term of use</a>)</li>
+				</ul>
+			</h4>
+			<h4>Sources of the photos on this website:
+				<ul>
+					<li>Header and footer background photo: home-made by JPilch using Bing Maps Aerial imagery 
+					</br>(Free for educational or non-profit organisation, see <a href="https://www.microsoft.com/en-us/maps/product" target="_blank">Term of use</a>)</li>
+					<li>Backgroud photo: <a href="http://www.serbiatravelhost.com/wp-content/uploads/2016/12/Zalazak-sunca-Pobednik-Beograd.jpg" target="_blank">http://www.serbiatravelhost.com/wp-content/uploads/2016/12/Zalazak-sunca-Pobednik-Beograd.jpg</a></li>
+				</ul>	
+			</h4>
+		</div>
+	</article>
+</section>
+
+<footer>
+  <img id="jolacontact" src="BusinessCard_GeoFenix.png" class="contactjola">
+	<div class="webmaster">
+		<p>"This project was realized during the Pioneers into Practice programme. 
+		Pioneers into Practice is a programme of EIT Climate-KIC. 
+		</br>EIT Climate-KIC is supported by the EIT, a body of the European Union."</p>
+		<p>Project contact details: 
+		</br>solarbelgrade2018@gmail.com</p>
+		<p>Webmaster: JPilch
+		</br> jolanta.pilch85@gmail.com</p>
+	</div>
+</footer>
+
+</body>
+</html>
