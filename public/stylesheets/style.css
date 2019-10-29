@@ -3,16 +3,33 @@ body {
   padding: 5px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   color: white;
-  background-color: black
+  background-color: black;
+  /* color:black;
+  background-color: white */
+  /* background-image: url("/images/solar-panel-in-the-field-2-1415250.jpg"); */
+  background-image: url("/images/solar-panel-in-the-field-5-1415227.jpg");
+  /* background-image: url("/images/solar-panels-1569672.jpg"); */
+  /* background-image: url("/images/solar-panels-reflecting-the-sky-1203838.jpg"); */
+  /* background-image: url("/images/solar-panels-1576178.jpg"); */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  vertical-align: center
+}
+
+h1 {
+  margin: 0px 0px
 }
 
 a {
-  color: #00B7FF;
+  /* color: #00B7FF; */
+  color: white;
 }
 
 /* Style for map*/
 #map {
-  width: 100%;
+  width: 80%;
   /* height: 600px; */
   height: 700px;
 }
@@ -77,13 +94,36 @@ td {
 
 /* Style do wydzielenia, na bazie only */
 header {
-  background-image: url("/images/header_footer_tło.png");
+  /* background-image: url("/images/solar-panel-in-the-field-2-1415250.jpg"); */
+  /* background-image: url("/images/solar-panel-in-the-field-2-1415250_cut.jpg"); */
+  /* background-image: url("/images/solar-panel-in-the-field-5-1415227.jpg"); */
+  /* background-image: url("/images/solar-panels-1569672.jpg"); */
+  /* background-image: url("/images/solar-panels-reflecting-the-sky-1203838.jpg"); */
+  /* background-image: url("/images/solar-panels-1576178.jpg"); */
+  /* opacity: 0.5; */
+  /* background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover; */
+  width: 100%;
+  min-height: 8vh;
+  color: whitesmoke;
+  position: relative;
+  /* color: black */
+}
+
+header:after {
+  content:'';
+  position: absolute;
+  top:0px;
+  left: 0px;
+  width:100%;
+  height:100%;
+  background: url("/images/solar-panel-in-the-field-2-1415250_cut.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  width: 100%;
-  min-height: 8vh;
-  color: white;
+  z-index:-1;
+  opacity: 0.4; 
 }
 
 .l-header--bold {
@@ -92,29 +132,72 @@ header {
 }
 
 .l-header__logo {
-  display: inline-block;
-  width: 10%;
+  /* display: inline-block; */
   /* padding: 10px 5px; */
-  padding: 0px;
-  margin: 0px;
+  /* padding: 0px;
+  margin: 0px; */
   vertical-align: middle;
+  display: inline-block
 }
 
 .l-header__nav {
-  width: 60%;
-  display: inline-block;
-  vertical-align: middle
-}
-
-footer {
-  background-image: url("/images/header_footer_tło.png");
+  width: 100%;
+  /* display: inline-block; */
+  display: block;
+  /* vertical-align: middle */
+  /* background: url("/images/solar-panel-in-the-field-2-1415250_cut.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  position: relative; */
+}
+
+/* .l-header__nav:after {
+  content:'';
+  position: absolute;
+  top:0px;
+  left: 0px;
+  width:100%;
+  height:100%;
+  background: url("/images/solar-panel-in-the-field-2-1415250_cut.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index:-1;
+  opacity: 1; 
+} */
+
+footer {
+  /* background: url("/images/solar-panel-in-the-field-2-1415250_cut.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index:-1;
+  opacity: 0.4;   */
+  /* background-image: url("/images/header_footer_tło.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover; */
   display: table;
   width: 100%;
   min-height: 8vh;
   text-align: center;	
+  position: relative;
+}
+
+footer:after {
+  content:'';
+  position: absolute;
+  top:0px;
+  left: 0px;
+  width:100%;
+  height:100%;
+  background: url("/images/solar-panel-in-the-field-2-1415250_cut.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index:-1;
+  opacity: 0.4; 
 }
 
 /* footer {
@@ -178,7 +261,7 @@ nav a:active {
 
 /* z Components */
 .c-img_logo_left {
-	width: 160px;
+	width: 100px;
   height: auto;
 }
 
@@ -237,3 +320,16 @@ nav a:active {
   font-style: Arial, sans-serif;
   font-weight: bold;
 }
+
+.test {
+  display: inline-block;
+  width: 80%;
+  text-align: center;
+  color: whitesmoke;
+  text-shadow: 3px -3px 10px black;
+}
+
+/* .for-figure {
+  display: inline-block;
+  width: 15%;
+} */
