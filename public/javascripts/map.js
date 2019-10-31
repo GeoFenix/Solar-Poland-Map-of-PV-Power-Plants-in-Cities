@@ -13,7 +13,7 @@ function makeMap(solarPowerPlants, countryLines, currentCategory) {
     var openStreetTile = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: '© OpenStreetMap'}).addTo(map);
     // 2a) WorldImageryTile (ArcGIS) 
     var mapLink = '<a href="http://www.esri.com/">Esri</a>';
-    var wholink = 'i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
+    var wholink = 'i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, DigitalGlobe, FSA, Swisstopo and the GIS User Community';
     var worldImageryTile = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {attribution: '&copy; '+ mapLink +', '+ wholink, maxZoom: 18}).addTo(map);    
     
     //3. Setting internal style for geojson data (method with passing style: object)
@@ -249,9 +249,9 @@ function makeMap(solarPowerPlants, countryLines, currentCategory) {
         };
         var markersSolarPowerPlantsLayer = L.layerGroup(markersSolarPowerPlants);
         var overlayMaps = {
-            "Country boundries": countryLines,
-            "Poligony miejskich elektrowni słoneczncyh": solarPowerPlants,
-            "Markery miejskich elektrowni słonecznych": markersSolarPowerPlantsLayer
+            "Granice państw": countryLines,
+            "Poligony budynków": solarPowerPlants,
+            "Ikony miejskich elektrowni słonecznych": markersSolarPowerPlantsLayer
         };
         L.control.layers(baseMaps, overlayMaps).addTo(map);
     }

@@ -1,28 +1,33 @@
-form(action='/map')
-    select(name='name')
-        //- option(='', selected='', value='')
-        option(value='f2') Etap projektu
-        option(value='f3') Rodzaj spółdzielni
-        option(value='f4') Miasto
-        option(value='f5') Rok oddania do użytku
-        option(value='f6') Adres
-        option(value='f7') Ilość instalacji
-        option(value='f8') Rodzaj instalacji
-        option(value='f9') Moc całkowita instalacji
-        option(value='f10') Produkcja energii na rok
-        option(value='f11') Koszty
-        option(value='f12') Realizator
-        option(value='f13') Prognozowana redukcja CO2 (na rok?)
-        option(value='f14') Info URL
-    input(type='submit', value='Submit')
-//- div for leaflet map
-#map
+<div class="container c-container--section">
+    <div class = "c-box-center--map">
+        <p> Wybierz atrybut opisujący miejską elektrownię słoneczną:</p>
+        form(action='/map')
+            select(name='name')
+                //- option(='', selected='', value='')
+                option(value='f2') Etap projektu
+                option(value='f3') Rodzaj spółdzielni
+                option(value='f4') Miasto
+                option(value='f5') Rok oddania do użytku
+                option(value='f6') Adres
+                option(value='f7') Ilość instalacji
+                option(value='f8') Rodzaj instalacji
+                option(value='f9') Moc całkowita instalacji
+                option(value='f10') Produkcja energii na rok
+                option(value='f11') Koszty
+                option(value='f12') Realizator
+                option(value='f13') Prognozowana redukcja CO2
+                option(value='f14') Info URL
+            input(type='submit', value='Zatwierdź')
+        #map
+    </div>
+</div>
 script.
     // - Passing variables from backend
     var solarPowerPlants = !{JSON.stringify(jsonDataSolarPowerPlants)};
     var countryLines = !{JSON.stringify(jsonDataCountryLines)};
     var attributeParameter = !{JSON.stringify(attributeParameter)}
-script(src="javascripts/map.js")
+script(src="javascripts/map.js")    
+
  
 
         

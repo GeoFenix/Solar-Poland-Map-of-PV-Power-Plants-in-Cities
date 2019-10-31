@@ -27,13 +27,6 @@ a {
   color: white;
 }
 
-/* Style for map*/
-#map {
-  width: 80%;
-  /* height: 600px; */
-  height: 700px;
-}
-
 /* Style for <table> element put into popup window with attributes */
 
 table {
@@ -285,6 +278,39 @@ nav a:active {
   
 }
 
+/* Style for map*/
+#map {
+  width: 100%;
+  /* height: 600px; */
+  height: 700px;
+}
+
+/*Hero */
+
+.c-container--section {
+	padding-top: 20px;
+	padding-bottom: 20px
+}
+
+.c-box-center--map {
+	margin-left: auto;
+	margin-right: auto;
+  width: 80%;
+  font-weight: bold
+}
+
+.c-box-center--map p {
+  color: black;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.c-box-center--section {
+	margin-left: auto;
+	margin-right: auto;
+	width: 66.66666667%
+}
+
 .l-hero__content {
   position: absolute;
   left: 64%;
@@ -327,6 +353,30 @@ nav a:active {
   text-align: center;
   color: whitesmoke;
   text-shadow: 3px -3px 10px black;
+}
+
+
+/* Instrukcja */
+.instruction-img-center {
+  text-align: center
+}
+
+.img-instrukcja {
+  width: 17%
+}
+
+.elektrownia-sloneczna, .kes {
+  color: black;
+  font-size: 18px;
+  background-image: url("/images/article_background.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 5px
+}
+
+.article-container {
+  padding: 15px
 }
 
 /* .for-figure {
