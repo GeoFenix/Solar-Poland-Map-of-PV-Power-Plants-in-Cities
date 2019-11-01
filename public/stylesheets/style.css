@@ -3,14 +3,7 @@ body {
   padding: 5px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   color: white;
-  background-color: black;
-  /* color:black;
-  background-color: white */
-  /* background-image: url("/images/solar-panel-in-the-field-2-1415250.jpg"); */
   background-image: url("/images/solar-panel-in-the-field-5-1415227.jpg");
-  /* background-image: url("/images/solar-panels-1569672.jpg"); */
-  /* background-image: url("/images/solar-panels-reflecting-the-sky-1203838.jpg"); */
-  /* background-image: url("/images/solar-panels-1576178.jpg"); */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -18,18 +11,109 @@ body {
   vertical-align: center
 }
 
-h1 {
-  margin: 0px 0px
+a {
+  color: whitesmoke;
 }
 
-a {
-  /* color: #00B7FF; */
-  color: white;
+/* Header*/
+header {
+  width: 100%;
+  min-height: 8vh;
+  color: whitesmoke;
+  position: relative;
+}
+
+header:after {
+  content:'';
+  position: absolute;
+  top:0px;
+  left: 0px;
+  width:100%;
+  height:100%;
+  background: url("/images/solar-panel-in-the-field-2-1415250_cut.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index:-1;
+  opacity: 0.4; 
+}
+
+.header--bold {
+  font-weight: bold;
+  text-align: center;
+}
+
+.header__nav {
+  width: 100%;
+  display: block;
+}
+
+.header__title {
+  width: 90%;
+  padding-bottom: 20px; 
+  display: inline-block;
+  color: whitesmoke;
+  text-shadow: 3px -3px 10px black;
+}
+
+/* Nav*/
+
+nav li {
+	display: inline-block;
+	list-style: none;
+	margin-left: 1%;
+	margin-right: 1%;
+	padding: 10px 5px; 
+	font-size: 14px;
+}
+
+nav a {
+	text-decoration: none;
+}
+
+nav a:link {
+	color: none;
+}
+
+nav a:visited {
+	color: whitesmoke; 
+}
+
+nav a:hover {
+  background: yellow;
+  color: black
+}
+
+nav a:active {
+  background: green;
+  color: black
+}
+
+/* z Components */
+
+/* Style for map*/
+
+.box-center__map {
+	margin-left: auto;
+	margin-right: auto;
+  width: 80%;
+  font-weight: bold
+}
+
+.box-center__map p {
+  color: black;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+#map {
+  width: 100%;
+  height: 700px;
 }
 
 /* Style for <table> element put into popup window with attributes */
 
-table {
+#map table {
   border: solid 2px black;
   border-collapse: collapse;
   text-align: center;
@@ -38,14 +122,14 @@ table {
   background: white 
 }
 
-th {
+#map th {
   border: solid 1px black;
   border-collapse: collapse;
   padding: 5px;
   text-align: right;
 }
 
-td {
+#map td {
   border: solid 1px black;
   border-collapse: collapse;
   text-align: left;
@@ -85,92 +169,43 @@ td {
   width: 740px;
 }
 
-/* Style do wydzielenia, na bazie only */
-header {
-  /* background-image: url("/images/solar-panel-in-the-field-2-1415250.jpg"); */
-  /* background-image: url("/images/solar-panel-in-the-field-2-1415250_cut.jpg"); */
-  /* background-image: url("/images/solar-panel-in-the-field-5-1415227.jpg"); */
-  /* background-image: url("/images/solar-panels-1569672.jpg"); */
-  /* background-image: url("/images/solar-panels-reflecting-the-sky-1203838.jpg"); */
-  /* background-image: url("/images/solar-panels-1576178.jpg"); */
-  /* opacity: 0.5; */
-  /* background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover; */
-  width: 100%;
-  min-height: 8vh;
-  color: whitesmoke;
-  position: relative;
-  /* color: black */
+/*Hero */
+
+.box-center__section {
+	margin-left: auto;
+	margin-right: auto;
+	width: 66.66666667%
+}
+		
+/* Instrukcja */
+.instrukcja-img-center {
+  text-align: center
 }
 
-header:after {
-  content:'';
-  position: absolute;
-  top:0px;
-  left: 0px;
-  width:100%;
-  height:100%;
-  background: url("/images/solar-panel-in-the-field-2-1415250_cut.jpg");
+.img-instrukcja {
+  width: 17%
+}
+
+/* Style dla artykulow */
+
+.elektrownia-sloneczna, .kes, .zrodlo-danych {
+  color: black;
+  font-size: 18px;
+  background-image: url("/images/article_background.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  z-index:-1;
-  opacity: 0.4; 
+  padding: 5px
 }
 
-.l-header--bold {
-  font-weight: bold;
-  text-align: center;
+.box-article {
+  padding: 15px;
+  line-height: 1.4
 }
 
-.l-header__logo {
-  /* display: inline-block; */
-  /* padding: 10px 5px; */
-  /* padding: 0px;
-  margin: 0px; */
-  vertical-align: middle;
-  display: inline-block
-}
-
-.l-header__nav {
-  width: 100%;
-  /* display: inline-block; */
-  display: block;
-  /* vertical-align: middle */
-  /* background: url("/images/solar-panel-in-the-field-2-1415250_cut.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative; */
-}
-
-/* .l-header__nav:after {
-  content:'';
-  position: absolute;
-  top:0px;
-  left: 0px;
-  width:100%;
-  height:100%;
-  background: url("/images/solar-panel-in-the-field-2-1415250_cut.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  z-index:-1;
-  opacity: 1; 
-} */
+/* Footer*/
 
 footer {
-  /* background: url("/images/solar-panel-in-the-field-2-1415250_cut.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  z-index:-1;
-  opacity: 0.4;   */
-  /* background-image: url("/images/header_footer_tło.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover; */
   display: table;
   width: 100%;
   min-height: 8vh;
@@ -193,24 +228,10 @@ footer:after {
   opacity: 0.4; 
 }
 
-/* footer {
-  background-color: black;
-  padding: 20px;
-  color: white;
-background-position: center;
-background-image: url("logo.png");
-background-repeat: no-repeat;
-background-size: cover;
-text-align: center;
-  font-size: 15px;
-} */
-
 footer p {
-  /* display: table-cell; */
   display: block;
-  color: grey;
-  font-size: 16px;
-  /* vertical-align: middle; */
+  color: whitesmoke;
+  font-size: 20px;
   text-align: center
 }
 
@@ -219,167 +240,3 @@ footer .contactjola {
   height: auto;
   background-color: black;
 }
-
-nav li {
-	display: inline-block;
-	list-style: none;
-
-	margin-left: 1%;
-	margin-right: 1%;
-	padding: 10px 5px; /* na razie tu daje padding */
-
-	font-size: 14px;
-}
-
-nav a {
-	text-decoration: none;
-	/* padding: 18px 5px;  tu coś dziwnego przesuwa jak dam padding na a */
-}
-
-nav a:link {
-	color: none;
-}
-
-nav a:visited {
-	color: white;
-}
-
-nav a:hover {
-	background: yellow
-}
-
-nav a:active {
-	background: green
-}
-
-/* z Components */
-.c-img_logo_left {
-	width: 100px;
-  height: auto;
-}
-
-.c-img_logo_right {
-	width: 80px;
-  height: auto;
-}
-
-.l-hero {
-  /* background-image: "/images/BusinessCard_GeoFenix.png"; */
-	/* background-image: url("/images/hero_section.png"); */
-  
-
-	position:relative;
-	
-	min-height: 80vh;
-
-	/* background-position: @section-hero-bg-position;  */
-	background-repeat: no-repeat;
-  background-size: cover;
-  
-}
-
-/* Style for map*/
-#map {
-  width: 100%;
-  /* height: 600px; */
-  height: 700px;
-}
-
-/*Hero */
-
-.c-container--section {
-	padding-top: 20px;
-	padding-bottom: 20px
-}
-
-.c-box-center--map {
-	margin-left: auto;
-	margin-right: auto;
-  width: 80%;
-  font-weight: bold
-}
-
-.c-box-center--map p {
-  color: black;
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
-
-.c-box-center--section {
-	margin-left: auto;
-	margin-right: auto;
-	width: 66.66666667%
-}
-
-.l-hero__content {
-  position: absolute;
-  left: 64%;
-  top: 60%;
-}
-
-.l-hero__text {
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
-
-.l-hero__text__name {
-  color: white;
-  font-size: 50px;
-}
-		
-.l-hero__text__job {
-  margin-top:0px;
-  font-size: 20px;
-  color: white;
-}
-		
-.l-hero__button {
-  height: 50px;
-  width: 170px;
-  border-bottom: 2px;
-  border-radius: 20px;
-
-  color: black;
-  background-color: orange;
-  
-  font-size: 16px;
-  font-style: Arial, sans-serif;
-  font-weight: bold;
-}
-
-.test {
-  display: inline-block;
-  width: 80%;
-  text-align: center;
-  color: whitesmoke;
-  text-shadow: 3px -3px 10px black;
-}
-
-
-/* Instrukcja */
-.instruction-img-center {
-  text-align: center
-}
-
-.img-instrukcja {
-  width: 17%
-}
-
-.elektrownia-sloneczna, .kes, .dataused {
-  color: black;
-  font-size: 18px;
-  background-image: url("/images/article_background.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  padding: 5px
-}
-
-.article-container {
-  padding: 15px
-}
-
-/* .for-figure {
-  display: inline-block;
-  width: 15%;
-} */

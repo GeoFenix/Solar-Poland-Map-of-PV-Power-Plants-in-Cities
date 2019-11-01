@@ -1,35 +1,19 @@
 link(rel="stylesheet" href="/stylesheets/jquery.fancybox.min.css")
 script(src="javascripts/_vendors/jquery.fancybox.min.js")
-<section id="hero" class ="l-hero"> 
-    <div class="container c-container--section">
-        <div class = "c-box-center--section">
-            <div id="instrukcja" class="article-container">
-                <h2> Instrukcja obsługi przeglądarki GIS - kliknij na obrazek i przejdź do galerii</h2>
-                //- Slider nie działa, na razie galerie zrobimy
-                //- include slider.pug
+<section id="hero"> 
+    <div class="container">
+        <div class="box-center__section">
+            <div id="instrukcja" class="box-article">
                 include gallery_instruction.pug
             </div>
-            <div id="elektrownia-sloneczna" class="article-container">
-                <article class="elektrownia-sloneczna">
-                    <h2>Czym jest miejska elektrownia fotowoltaiczna?</h2>
-                    <p>Prosument, czyli osoba lub podmiot wytwarzająca energię elektryczną z rozproszonych odnawialnych źródeł energii na własne potrzeby, magazynująca i odsprzedająca nadwyżki do sieci energetycznej, to nie tylko mieszkańcy domków jednorodzinnych. W Polsce istnieje już wiele instalacji fotowoltaicznych, których właścicielami są spółdzielnie i wspólnoty mieszkaniowe.</p>
-                    <p>Jak to działa? Mikroinstalacje montowane na dachach budynków mieszkalnych i bloków będących własnością spółdzielni zasilają ich część wspólną: korytarze, garaże, piwnice, windy czy też oświetlenia terenu zielonego. Nadwyżki niewykorzystane na miejscu wprowadzane są do sieci.  Jeśli moc instalacji nie przekracza 50 kW można je rozliczyć  w systemie opustów, przy zastosowaniu współczynnika 1:0,7.</p>
-                    <p>Stosowanie takich rozwiązań umożliwia ustawa o odnawialnych źródłach energii w wersji obowiązującej od połowy 2016 r. Rozwój inwestycji w fotowoltaikę realizowanych przez spółdzielnie mieszkaniowe został również ułatwiony dzięki programowi dofinansowań z  NFOŚiGW o nazwie "Prosument".</p>
-                    <p>Powyższa mapa przedstawia aktualnie istniejące miejskie elektrownie słoneczne w Polsce – zarówno te już działające jak i dopiero w fazie pilotażu. Największe przedsięwzięcie tego typu, Wrocławska Elektrownia Słoneczna realizowana przez Spółdzielnię Mieszkaniową Wrocław- Południe, już teraz może poszczycić się większą produkcja energii ze słońca niż zakładano.</p>
-                    <p>Wśród korzyści dla spółdzielni i wspólnot mieszkaniowych jest ustabilizowanie cen energii elektrycznej i niższe opłaty, niezależność energetyczna, zarabianie na nadwyżkach produkowanej energii oraz troska o środowisko naturalne. Poważnym ograniczeniem jest jednak brak możliwości wykorzystania nadwyżek produkowanej energii przez mieszkańców budynków, będących również członkami spółdzielni. Tutaj oczekujemy zmian legislacyjnych.</p>
-                    <p>Idąc krok dalej – przy zmianie prawa powstawać będą mogły spółdzielnie energetyczne, których ideą jest umożliwienie mieszkańcom miast, którzy nie mają własnego domu z odpowiednim dachem, inwestycję w produkcję energii odnawialnej z instalacji zlokalizowanych na innych obiektach. Wiele takich kooperatyw istnieje już na terenie Europu, np.<a href="https://www.dw.com/pl/nie-ma-to-jak-w%C5%82asny-pr%C4%85d-boom-sp%C3%B3%C5%82dzielni-energetycznych-w-rfn/a-4569546" target="_blank"> w Niemczech</a></p>   
-                </article>
+            <div id="elektrownia-sloneczna" class="box-article">
+                include article/elektrownia_słoneczna.pug
             </div>
-            <div id="kes" class="article-container">
-                <article class="kes" >
-                <h2>Czym jest Krakowska Elektrownia Społeczna (KES)?</h2>
-                    <p>Z myślą o tworzeniu własnych miejskich elektrowni fotowoltaicznych i wykorzystując dostępne rozwiązania prawne umożliwiające funkcjonowanie na warunkach zbliżonych do spółdzielni energetycznej, powstaje obecnie Krakowska Elektrownia Społeczna (KES). Jest to organizacja w formie spółdzielni użytkowników, która skupia mieszkańców Krakowa i ma na celu inwestowanie w instalacje fotowoltaiczne z zamiarem sprzedaży energii elektrycznej do odbiorców w miejscach działania instalacji (lub też klastra energii, jeśli takowy w Krakowie postanie). KES ma również cel społeczno-ekologiczny: przeciwdziałanie zmianom klimatu poprzez udział w transformacji energetycznej oraz promocji i edukacji społeczeństwa w zakresie energetyki rozproszonej, energetyki z odnawialnych źródeł energii oraz energetyki obywatelskiej.</p> 
-                    <p>Niniejsza mapa GIS jest jedną inicjatyw realizowanych w ramach celów naszej spółdzielni.</p>
-                    <p>Więcej już wkrótce na oficjalnej stronie Krakowskie Elektrowni Społecznej, a póki co trzymajcie za nas kciuki!</p>
-                </article>
+            <div id="kes" class="box-article">
+                include article/kes.pug
             </div>
-            <div id="zrodlo-danych" class="article-container">
-                include dataused.pug
+            <div id="zrodlo-danych" class="box-article">
+                include article/zrodlo_danych.pug
             </div>
         </div>
     </div>
