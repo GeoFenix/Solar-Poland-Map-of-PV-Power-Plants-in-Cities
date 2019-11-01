@@ -10,7 +10,7 @@ function makeMap(solarPowerPlants, countryLines, currentCategory) {
 
     // 2. Adding tile layers
     // 2a) OpenStreetMap 
-    var openStreetTile = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: '© OpenStreetMap'}).addTo(map);
+    var openStreetTile = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: '© OpenStreetMap Contributors'}).addTo(map);
     // 2a) WorldImageryTile (ArcGIS) 
     var mapLink = '<a href="http://www.esri.com/">Esri</a>';
     var wholink = 'i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, DigitalGlobe, FSA, Swisstopo and the GIS User Community';

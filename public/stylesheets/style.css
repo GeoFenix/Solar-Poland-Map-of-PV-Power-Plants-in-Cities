@@ -365,7 +365,7 @@ nav a:active {
   width: 17%
 }
 
-.elektrownia-sloneczna, .kes {
+.elektrownia-sloneczna, .kes, .dataused {
   color: black;
   font-size: 18px;
   background-image: url("/images/article_background.png");
