@@ -1,26 +1,26 @@
-/* Style general layout*/
+/* Style for general layout*/
 body {
   padding: 5px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   color: white;
+  vertical-align: center;
   background-image: url("/images/solar-panel-in-the-field-5-1415227.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
-  vertical-align: center
 }
 
 a {
   color: whitesmoke;
 }
 
-/* Header*/
+/* Style for header*/
 header {
   width: 100%;
   min-height: 8vh;
-  color: whitesmoke;
   position: relative;
+  color: whitesmoke;
 }
 
 header:after {
@@ -56,7 +56,7 @@ header:after {
   text-shadow: 3px -3px 10px black;
 }
 
-/* Nav*/
+/* Style for nav*/
 
 nav li {
 	display: inline-block;
@@ -81,15 +81,13 @@ nav a:visited {
 
 nav a:hover {
   background: yellow;
-  color: black
+  color: black;
 }
 
 nav a:active {
   background: green;
-  color: black
+  color: black;
 }
-
-/* z Components */
 
 /* Style for map*/
 
@@ -97,7 +95,7 @@ nav a:active {
 	margin-left: auto;
 	margin-right: auto;
   width: 80%;
-  font-weight: bold
+  font-weight: bold;
 }
 
 .box-center__map p {
@@ -111,32 +109,32 @@ nav a:active {
   height: 700px;
 }
 
-/* Style for <table> element put into popup window with attributes */
+/* Style for map - popup table for attributes */
 
-#map table {
+table.for-attributes {
   border: solid 2px black;
   border-collapse: collapse;
   text-align: center;
   font-size: 11px;
   width: 700px;
-  background: white 
+  background: white;
 }
 
-#map th {
+table.for-attributes th, td {
   border: solid 1px black;
   border-collapse: collapse;
   padding: 5px;
+}
+
+table.for-attributes th {
   text-align: right;
 }
 
-#map td {
-  border: solid 1px black;
-  border-collapse: collapse;
+table.for-attributes td {
   text-align: left;
-  padding: 5px
 }
 
-/* Style for map home and zoom controls */
+/* Style for map - home and zoom controls */
 
 .leaflet-bar a { 
   background-color: #fff; 
@@ -151,17 +149,17 @@ nav a:active {
   font: bold 18px 'Lucida Console', Monaco, monospace; 
 }
 
-/* Class for tooltip */
+/* Style for map - tooltip style depending on PV power plant type */
 .styleForElektrownia {
   background-color: yellow;
   font-weight: bold;
-  border-color: black
+  border-color: black;
 }
 
 .styleForPilotaz {
   background-color: orange;
   font-weight: bold;
-  border-color: black
+  border-color: black;
 }
 
 .custom .leaflet-popup-content-wrapper {
@@ -169,24 +167,24 @@ nav a:active {
   width: 740px;
 }
 
-/*Hero */
+/* Style for section pvpowerplants */
 
 .box-center__section {
 	margin-left: auto;
 	margin-right: auto;
-	width: 66.66666667%
+	width: 66.66666667%;
 }
 		
-/* Instrukcja */
+/* Style for section pvpowerplants - instruction  */
 .instrukcja-img-center {
-  text-align: center
+  text-align: center;
 }
 
 .img-instrukcja {
-  width: 17%
+  width: 17%;
 }
 
-/* Style dla artykulow */
+/* Style for section pvpowerplants - articles */
 
 .elektrownia-sloneczna, .kes, .zrodlo-danych {
   color: black;
@@ -195,15 +193,19 @@ nav a:active {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  padding: 5px
+  padding: 5px;
 }
 
 .box-article {
   padding: 15px;
-  line-height: 1.4
+  line-height: 1.4;
 }
 
-/* Footer*/
+.image-article {
+  width: 100%;
+}
+
+/* Style for footer*/
 
 footer {
   display: table;
@@ -232,7 +234,7 @@ footer p {
   display: block;
   color: whitesmoke;
   font-size: 20px;
-  text-align: center
+  text-align: center;
 }
 
 footer .contactjola {

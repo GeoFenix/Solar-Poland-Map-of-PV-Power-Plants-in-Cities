@@ -101,7 +101,7 @@ function makeMap(solarPowerPlants, countryLines, currentCategory) {
 
     //Function 
     function addPopUpTable(properties) {
-        var $table = $('<table>');
+        var $table = $('<table class="for-attributes">');
 
         var headers = ['Id', 'Etap projektu', 'Rodzaj spółdzielni', 'Miasto', 'Rok oddania do użytku', 'Adres', 'Ilość instalacji', 'Rodzaj instalacji', 'Moc całkowita instalacji', 'Produkcja energii na rok', 'Koszty', 'Realizator', 'Prognozowana redukcja CO2 (na rok?)', 'Info URL']
         var thBox = [];
