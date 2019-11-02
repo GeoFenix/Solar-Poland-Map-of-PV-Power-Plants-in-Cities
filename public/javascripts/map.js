@@ -99,7 +99,7 @@ function makeMap(solarPowerPlants, countryLines, currentCategory) {
 
     //ADDITIONAL FUNCTIONS FOR LEAFLET MAP GENERATION
 
-    //Function 
+    //Function addPopUpTable
     function addPopUpTable(properties) {
         var $table = $('<table class="for-attributes">');
 
@@ -253,6 +253,13 @@ function makeMap(solarPowerPlants, countryLines, currentCategory) {
             "Poligony budynków": solarPowerPlants,
             "Ikony miejskich elektrowni słonecznych": markersSolarPowerPlantsLayer
         };
+
         L.control.layers(baseMaps, overlayMaps).addTo(map);
+
+        //Temporary solution for problems with 'checked' attribute for "Ikony miejskich elektrowni słonecznych": markersSolarPowerPlantsLayer
+        var $span = $('div span:contains("Ikony miejskich elektrowni słonecznych")')
+        var parentDiv = ($($span[0]).parent()[0]);
+        var $input =  $(parentDiv).find('input');
+        $input.attr('checked','')
     }
 }
